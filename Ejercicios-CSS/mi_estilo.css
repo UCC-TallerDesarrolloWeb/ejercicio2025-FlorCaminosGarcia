@@ -1,0 +1,24 @@
+body{
+    text-align: center;
+    font-family: "Gugi", cursive;
+    background: linear-gradient(to right, #eaaf89, rgba(236, 145, 202, 0.93));
+}
+div{
+    border: 2px dashed #7a8aac;
+    margin: 10px;
+    padding: 5px 30px;
+    border-radius: 15px;
+    box-shadow: 10px 12px #f1c4a7;
+}
+#Principal{
+    width: 50px;
+    float: left;
+    border-radius: 50%;
+}
+div.especial h3{
+    font-family: "Roboto Slab", serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+    text-shadow: 10px 5px #ffd9d9;
+}
