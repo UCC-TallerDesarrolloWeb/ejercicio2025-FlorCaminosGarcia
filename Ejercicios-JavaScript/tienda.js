@@ -1,3 +1,5 @@
+// noinspection JSMismatchedCollectionQueryUpdate
+
 const productos = [
   {
     nombre: "Cabezal Sparring",
@@ -105,6 +107,49 @@ let mostrarCatalogo = (prod = productos) => {
     document.getElementById("catalogo").innerHTML = contenido;
 };
 
+let mostrarCarrito = () =>
+{
+    let contenido = "";
+    const carrito = JSON.parse(localStorage.getItem("carrito"));
+    let total = 0;
+
+    if (carrito != null)
+    {
+        const listProd = [];
+        const listCant = [];
+
+        carrito.forEach((num) =>
+        {
+            if(!listProd.includes(num))
+            {
+                listProd.push(num);
+                listCant.push(1);
+            }
+            else
+            {
+                const inx = listProd.indexOf(num);
+                listCant[inx] += 1;
+            }
+        })
+
+        carrito.forEach((num, id) =>
+        {
+            const element = productos[num];
+            contenido += `<div>
+                <h3>${element.nombre}</h3>
+                <p>${element.precio}</p>
+                <p>Cantidad: ${listCant[id]}</p>
+                <button type="button" onclick="eliminarProducto(${id})">Eliminar Producto</button>
+            </div>`;
+            total += element.precio * listCant[id];
+        });
+
+        contenido += `Total: ${total}`;
+        contenido += `<button type="button" onclick="vaciarCarrito()">Vaciar Carrito</button>`;
+        document.getElementById("carrito").innerHTML = contenido;
+    }
+};
+
 let cargarProductos = () => {
     let contenido = "";
 
@@ -157,14 +202,40 @@ let cargarCarrito = () =>{
     else
     {
         carritoList = JSON.parse(carritoList);
-        carritoList.forEach((num) => {
+        carritoList.forEach((num, id) => {
             contenido += `<div>
             <h3>${productos[num].nombre}</h3>
-            <p>${productos[num].precio}</p></div>`;
+            <p>${productos[num].precio}</p>
+            <button type="button" onclick="eliminarProducto(${id})">Eliminar Producto</button>
+            </div>`;
         })
+        contenido += `<button type="button" onClick="vaciarCarrito()">Vaciar Carrito</button>`
+    }
+    document.getElementById("mostrar-carrito").innerHTML = contenido;
+}
+
+let vaciarCarrito = () =>
+{
+    localStorage.removeItem("carrito");
+    window.location.reload();
+}
+
+let eliminarProducto = (id) =>
+{
+    let carritoList = localStorage.getItem("carrito");
+    carritoList = JSON.parse(carritoList);
+    carritoList.splice(id, 1);
+
+    if(carritoList.length > 0)
+    {
+        localStorage.setItem("carrito", JSON.stringify(carritoList));
+    }
+    else
+    {
+        localStorage.removeItem("carrito");
     }
 
-    document.getElementById("mostrar-carrito").innerHTML = contenido;
+    window.location.reload();
 }
 
 /**
