@@ -1,3 +1,5 @@
+// noinspection JSUnusedAssignment,JSValidateTypes
+
 /**
  * Conversión de unidades, de metros, yardas, pies y pulgadas
  * @method cambiarUnidades
@@ -6,37 +8,48 @@
  * @return Valor que retorna
  */
 function cambiarUnidades(id, valor) {
+    let metro, pulgada, pie, yarda;
+
+    if(valor.includes(",")){
+        valor = valor.replace(",", ".");
+    }
+
     if (isNaN(valor)){
         alert("Se ingreso un valor invalido");
-        document.lasUnidades.unid_metro.value = "";
-        document.lasUnidades.unid_pulgada.value = "";
-        document.lasUnidades.unid_pie.value = "";
-        document.lasUnidades.unid_yarda.value = "";
+        metro = "";
+        pulgada = "";
+        pie = "";
+        yarda = "";
     }
     else if (id==="metro")
     {
-        document.lasUnidades.unid_pulgada.value = 39.3701*valor;
-        document.lasUnidades.unid_pie.value = 3.28084*valor;
-        document.lasUnidades.unid_yarda.value = 1.09361*valor;
+        pulgada = 39.3701*valor;
+        pie = 3.28084*valor;
+        yarda = 1.09361*valor;
     }
     else if (id==="pulgada")
     {
-        document.lasUnidades.unid_metro.value = 0.0254*valor;
-        document.lasUnidades.unid_pie.value = 0.083333*valor;
-        document.lasUnidades.unid_yarda.value = 0.027778*valor;
+        metro = 0.0254*valor;
+        pie = 0.083333*valor;
+        yarda = 0.027778*valor;
     }
     else if (id==="pie")
     {
-        document.lasUnidades.unid_pulgada.value = 12*valor;
-        document.lasUnidades.unid_metro.value = 0.3048*valor;
-        document.lasUnidades.unid_yarda.value = 0.3333*valor;
+        pulgada = 12*valor;
+        metro = 0.3048*valor;
+        yarda = 0.3333*valor;
     }
     else if (id==="yarda")
     {
-        document.lasUnidades.unid_pulgada.value = 36*valor;
-        document.lasUnidades.unid_pie.value = 3*valor;
-        document.lasUnidades.unid_metro.value = 0.9144*valor;
+        pulgada = 36*valor;
+        pie = 3*valor;
+        metro = 0.9144*valor;
     }
+
+    document.lasUnidades.unid_metro.value = Math.round(metro*100)/100;
+    document.lasUnidades.unid_yarda.value = Math.round(yarda*100)/100;
+    document.lasUnidades.unid_pie.value = Math.round(pie*100)/100;
+    document.lasUnidades.unid_pulgada.value = Math.round(pulgada*100)/100;
 }
 
 function convertirGR(id){
@@ -70,30 +83,30 @@ function calcularSuma()
 {
     let num1, num2;
     num1 = Number(document.getElementsByName("sum_num1") [0].value);
-    num2 = document.getElementsByName("sum_num2") [0].value;
-    document.getElementsByName("sum_total") [0].value = num1 + Number(num2);
+    num2 = Number(document.getElementsByName("sum_num2") [0].value);
+    document.getElementsByName("sum_total") [0].innerHTML = num1 + num2;
 }
 
 function calcularResta()
 {
     let num1, num2;
     num1 = Number(document.getElementsByName("res_num1") [0].value);
-    num2 = document.getElementsByName("res_num2") [0].value;
-    document.getElementsByName("res_total") [0].value = num1 - Number(num2);
+    num2 = Number(document.getElementsByName("res_num2") [0].value);
+    document.getElementsByName("res_total") [0].innerHTML = num1 - num2;
 }
 
 function calcularMultiplication()
 {
     let num1, num2;
     num1 = Number(document.getElementsByName("mul_num1") [0].value);
-    num2 = document.getElementsByName("mul_num2") [0].value;
-    document.getElementsByName("mul_total") [0].value = num1 * Number(num2);
+    num2 = Number(document.getElementsByName("mul_num2") [0].value);
+    document.getElementsByName("mul_total") [0].innerHTML = num1 * num2;
 }
 
 function calcularDivision()
 {
     let num1, num2;
     num1 = Number(document.getElementsByName("div_num1") [0].value);
-    num2 = document.getElementsByName("div_num2") [0].value;
-    document.getElementsByName("div_total") [0].value = num1 / Number(num2);
+    num2 = Number(document.getElementsByName("div_num2") [0].value);
+    document.getElementsByName("div_total") [0].innerHTML = num1 / num2;
 }
