@@ -1,0 +1,23 @@
+div {
+    border: 1px solid black;
+    margin: 20px;
+    padding: 10px;
+    background-color: aquamarine;
+    border-radius: 15px;
+    box-shadow: 10px 12px grey;
+}
+
+#icono_usuario {
+    width: 10%;
+    float: left;
+}
+
+body {
+    text-align: center;
+    font-family: "playwrite", cursive;
+    background: linear-gradient(to right, #87bebc, #fed6e3);
+}
+
+h3 {
+    text-shadow: 10px 5px white;
+}
